@@ -1,0 +1,35 @@
+description "Vfs core types (header-only stub)ÿB128,0,0\377";
+
+uses
+	Core,
+	Core/MetaTraits,
+	Core/ProcessUtil,
+	Core/DataStructures;
+
+file
+	AGENTS.md,
+	Core.h,
+	Factory.h,
+	VfsFactory.h,
+	VfsFactory.cpp,
+	Types.h,
+	AstValue.h,
+	VfsValueExt.h,
+	VfsValue.h,
+	VfsValue.cpp,
+	VfsEnum.h,
+	VfsEnum.cpp,
+	VfsValue_mcp_stubs.cpp,
+	VfsCore.h,
+	VfsBase.h,
+	Mount.h,
+	Mount.cpp,
+	VFS.h,
+	VFS.cpp,
+	Automation.h,
+	Automation.cpp,
+	WorldState.h,
+	WorldState.cpp,
+	VirtualNode.h,
+	VirtualNode.cpp;
+

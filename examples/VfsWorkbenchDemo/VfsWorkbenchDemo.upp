@@ -1,0 +1,11 @@
+description "VFS Tree App Workbench Demo\377B128,0,0";
+
+uses
+	CtrlLib,
+	Vfs/Ctrl;
+
+file
+	main.cpp;
+
+mainconfig
+	"" = "GUI";
