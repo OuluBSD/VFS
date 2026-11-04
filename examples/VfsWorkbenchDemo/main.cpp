@@ -105,11 +105,19 @@ struct CounterCtrl : VfsValueExtCtrl {
 };
 
 void RegisterWorkbenchComponents() {
+	static bool registered = false;
+	if (registered) return;
+	registered = true;
+
 	VfsValueExtFactory::Register<TextDocExt>("TextDocument", VFSEXT_COMPONENT, "text_doc", "Components");
 	VfsValueExtFactory::RegisterCtrl<TextDocExt, TextDocCtrl>("TextDocCtrl");
 
 	VfsValueExtFactory::Register<CounterExt>("Counter", VFSEXT_COMPONENT, "counter", "Components");
 	VfsValueExtFactory::RegisterCtrl<CounterExt, CounterCtrl>("CounterCtrl");
+}
+
+INITIALIZER(WorkbenchComponents) {
+	RegisterWorkbenchComponents();
 }
 
 GUI_APP_MAIN {
@@ -166,6 +174,9 @@ GUI_APP_MAIN {
 
 		DeleteFile(temp_file);
 		Cout() << "VfsWorkbenchDemo: Automated self-test passed successfully!\n";
+		win.app.ClearExtensionCtrl();
+		win.app.GetRoot().sub.Clear();
+		MemoryIgnoreLeaksBegin();
 		return;
 	}
 

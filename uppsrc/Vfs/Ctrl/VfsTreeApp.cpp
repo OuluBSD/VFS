@@ -265,6 +265,7 @@ bool VfsTreeApp::LoadTree(const String& path) {
 }
 
 bool VfsTreeApp::SaveTree(const String& path) {
+	RealizePath(path);
 	String json = StoreAsJson(root, true);
 	if (!SaveFile(path, json))
 		return false;

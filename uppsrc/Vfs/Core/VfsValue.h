@@ -765,8 +765,8 @@ public:
 					if (val.sub[pos].type_hash == type_hash)
 						break;
 			}
-			operator T&() {return val.sub[pos].GetExt<T>();}
-			T& operator*() {return val.sub[pos].GetExt <T>();}
+			operator T&() {return val.sub[pos].template GetExt<T>();}
+			T& operator*() {return val.sub[pos].template GetExt<T>();}
 		};
 		Iterator begin() {return Iterator(val, -1);}
 		Iterator end() {return Iterator(val, val.sub.GetCount());}
