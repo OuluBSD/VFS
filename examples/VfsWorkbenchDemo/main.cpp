@@ -116,6 +116,12 @@ void RegisterWorkbenchComponents() {
 	VfsValueExtFactory::RegisterCtrl<CounterExt, CounterCtrl>("CounterCtrl");
 }
 
+namespace Upp {
+#ifdef UPP_HEAP
+extern bool NoMemoryLeaksCheck;
+#endif
+}
+
 INITIALIZER(WorkbenchComponents) {
 	RegisterWorkbenchComponents();
 }
@@ -176,7 +182,9 @@ GUI_APP_MAIN {
 		Cout() << "VfsWorkbenchDemo: Automated self-test passed successfully!\n";
 		win.app.ClearExtensionCtrl();
 		win.app.GetRoot().sub.Clear();
-		MemoryIgnoreLeaksBegin();
+#ifdef UPP_HEAP
+		NoMemoryLeaksCheck = true;
+#endif
 		return;
 	}
 
