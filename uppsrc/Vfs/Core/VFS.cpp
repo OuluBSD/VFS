@@ -77,6 +77,7 @@ void VfsPath::Set(String path) {
 		str = "/";
 	#endif
 	
+	path.Replace("\\", "/");
 	Vector<String> str_parts = Split(path , INTERNAL_SEPS);
 	
 	#if INTERNAL_COMB || INTERNAL_CPM
