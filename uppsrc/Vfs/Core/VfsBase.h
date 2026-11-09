@@ -22,15 +22,16 @@ inline String AppendUnixFileName(String a, String b) {
 	return a + "/" + b;
 }
 
-inline String HexStr64(int64 i) { return Format("0x%X", i); }
-inline String HexStrPtr(const void* i) { return Format("0x%X", (int64)(uintptr_t)i); }
-template <class T> inline String HexStrPtr(const T* o) { return HexStrPtr((const void*)o); }
-
 inline void Jsonize(JsonIO& io, uint64& var) {
 	int64 v = (int64)var;
 	Jsonize(io, v);
 	var = (uint64)v;
 }
+
+#ifndef _Core_Ext_ExtUtil_h_
+inline String HexStr64(int64 i) { return Format("0x%X", i); }
+inline String HexStrPtr(const void* i) { return Format("0x%X", (int64)(uintptr_t)i); }
+template <class T> inline String HexStrPtr(const T* o) { return HexStrPtr((const void*)o); }
 
 template <class T> inline int VectorFind(const Vector<T>& v, const T& o) {
 	int i = 0;
@@ -84,6 +85,7 @@ template <class T> inline int VectorFindAdd(Vector<T>& v, const T& o, T** found=
 	if (found) *found = &v[i];
 	return i;
 }
+#endif
 
 template <class T>
 inline T* FindRawValue(Value& v) {
