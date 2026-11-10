@@ -4,10 +4,12 @@ uses
 	Vfs/Core;
 
 mainconfig
-	"NCURSES" = "flagNCURSES",
-	"" = "";
+	"" = "",
+	"NCURSES" = "flagNCURSES";
 
-library(POSIX & flagNCURSES) "ncursesw panelw formw menuw tinfow";
+library(LINUX & flagNCURSES) "ncursesw panelw formw menuw";
+library(OSX & flagNCURSES) "ncurses";
+library(BSD & !OSX & flagNCURSES) "ncursesw panelw formw menuw";
 
 file
 	Shell.h,

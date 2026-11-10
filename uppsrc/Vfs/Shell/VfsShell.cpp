@@ -19,19 +19,21 @@ bool VfsShellConsole::IsVfsPath(const String& path) {
 String VfsShellConsole::ConvertToInternalPath(const String& path, const String& cwd) {
 	if (path.IsEmpty()) return cwd;
 	
-	// If it's already in the VFS overlay, return as is
+	// If it's already in the VFS overlay, return as is (normalized to forward slashes)
 	if (IsVfsPath(path)) {
-		return path;
-	}
-	
-	// If it's an absolute system path, return as is
-	if (path.StartsWith("/")) {
-		return path;
+		String p = path;
+		p.Replace("\\", "/");
+		return p;
 	}
 	
 	// If it's the VFS root
 	if (path == "/vfs") {
 		return "/vfs/";
+	}
+	
+	// If it's an absolute system path, return as is
+	if (path.StartsWith("/") || path.StartsWith("\\") || (path.GetCount() >= 2 && IsAlpha(path[0]) && path[1] == ':')) {
+		return NormalizePath(path);
 	}
 	
 	// Handle relative paths by resolving against current working directory
@@ -42,12 +44,16 @@ String VfsShellConsole::ConvertToInternalPath(const String& path, const String& 
 		newPath = cwd;
 	}
 	
-	if (!newPath.EndsWith("/")) newPath += "/";
+	if (!newPath.EndsWith("/") && !newPath.EndsWith("\\"))
+		newPath += (newPath.StartsWith("/vfs") ? "/" : DIR_SEPS);
 	newPath += path;
 	
 	// Normalize the path (handle "..", ".", etc.)
-	// We'll use U++'s path utilities where possible
-	return NormalizePath(newPath);
+	String result = NormalizePath(newPath);
+	if (newPath.StartsWith("/vfs")) {
+		result.Replace("\\", "/");
+	}
+	return result;
 }
 
 // Convert internal path back to external format
