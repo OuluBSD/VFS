@@ -111,6 +111,23 @@ jobs:
           uppbuilder tests/VfsTests -m ${{ matrix.bm }} --bazaarcore "$GITHUB_WORKSPACE/BazaarCore" -v
           ./bin/VfsTests
 
+      - name: Build & Run VfsShellTests (${{ matrix.bm }})
+        run: |
+          cd VFS
+          uppbuilder tests/VfsShellTests -m ${{ matrix.bm }} --bazaarcore "$GITHUB_WORKSPACE/BazaarCore" -v
+          ./bin/VfsShellTests
+
+      - name: Build & Verify Vfs/Shell CLI (${{ matrix.bm }})
+        run: |
+          cd VFS
+          uppbuilder Vfs/Shell -m ${{ matrix.bm }} --bazaarcore "$GITHUB_WORKSPACE/BazaarCore" -v
+          ./bin/Shell --help
+          ./bin/Shell "echo VFS Shell Online"
+          ./bin/Shell "pwd"
+          ./bin/Shell "echo A ; echo B"
+          ./bin/Shell "true && echo LogicalAndPassed"
+          ./bin/Shell "false || echo LogicalOrPassed"
+
       - name: Build VfsWorkbenchDemo (${{ matrix.bm }})
         run: |
           cd VFS
@@ -227,6 +244,25 @@ jobs:
           cd VFS
           uppbuilder.exe tests/VfsTests -m MSVS22x64 --bazaarcore "%GITHUB_WORKSPACE%\BazaarCore" -v
           bin\VfsTests.exe
+
+      - name: Build & Run VfsShellTests (MSVC)
+        shell: cmd
+        run: |
+          cd VFS
+          uppbuilder.exe tests/VfsShellTests -m MSVS22x64 --bazaarcore "%GITHUB_WORKSPACE%\BazaarCore" -v
+          bin\VfsShellTests.exe
+
+      - name: Build & Verify Vfs/Shell CLI (MSVC)
+        shell: cmd
+        run: |
+          cd VFS
+          uppbuilder.exe Vfs/Shell -m MSVS22x64 --bazaarcore "%GITHUB_WORKSPACE%\BazaarCore" -v
+          bin\Shell.exe --help
+          bin\Shell.exe "echo VFS Shell Online"
+          bin\Shell.exe "pwd"
+          bin\Shell.exe "echo A ; echo B"
+          bin\Shell.exe "true && echo LogicalAndPassed"
+          bin\Shell.exe "false || echo LogicalOrPassed"
 
       - name: Build & Run VfsWorkbenchDemo (MSVC)
         shell: cmd

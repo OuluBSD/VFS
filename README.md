@@ -13,6 +13,12 @@ Virtual File System, Hierarchical Data Trees, Component Extensions, and Dynamic 
 2. **`Vfs/Ctrl`**: A plug-and-play GUI workbench template:
    - `VfsTreeApp`: Horizontal splitter control featuring a `TreeCtrl` left pane and a dynamically instantiated `VfsValueExtCtrl` right pane.
    - `VfsTreeAppWindow`: Ready-to-use `TopWindow` with menu bar, status bar, and workspace persistence.
+3. **`Vfs/Shell`**: Interactive command-line shell and script interpreter for VFS operations:
+   - Dual-mount filesystem (`/` for system files, `/vfs` for virtual file system).
+   - Core file utilities: `cd`, `pwd`, `ls`, `tree`, `mkdir`, `touch`, `rm`, `mv`, `link`, `export`, `cat`, `grep`, `rg`, `head`, `tail`, `uniq`, `count`, `echo`.
+   - csh/tcsh syntax engine: pipelines (`|`), logical operators (`&&`, `||`), sequences (`;`), and I/O redirection.
+   - Interactive ncurses-based editor (`NcursesEditor`) when compiled with `flagNCURSES`.
+   - Forwarding compatibility shim `VfsShell`.
 
 ## Architecture
 
@@ -47,6 +53,15 @@ Virtual File System, Hierarchical Data Trees, Component Extensions, and Dynamic 
 ```bash
 uppbuilder tests/VfsTests -m CLANG
 ./bin/VfsTests
+
+uppbuilder tests/VfsShellTests -m CLANG
+./bin/VfsShellTests
+```
+
+### Build and Run VFS Shell
+```bash
+uppbuilder Vfs/Shell -m CLANG
+./bin/Shell "echo VFS Shell Online"
 ```
 
 ### Build Workbench Demo

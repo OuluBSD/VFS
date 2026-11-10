@@ -1,7 +1,8 @@
 description "Virtual File System & Workbench Architecture\377B128,0,0";
 
 uses
-	Vfs/Core;
+	Vfs/Core,
+	Vfs/Shell;
 
 uses(GUI)
 	Vfs/Ctrl;

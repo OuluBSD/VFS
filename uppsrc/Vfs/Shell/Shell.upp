@@ -1,0 +1,21 @@
+description "VFS Shell - Command-line interface for VFS operations\377B128,0,0";
+
+uses
+	Vfs/Core;
+
+mainconfig
+	"NCURSES" = "flagNCURSES",
+	"" = "";
+
+library(POSIX & flagNCURSES) "ncursesw panelw formw menuw tinfow";
+
+file
+	Shell.h,
+	VfsShell.h,
+	VfsShell.cpp,
+	VfsShellMain.cpp,
+	ShellSyntax.h,
+	ShellSyntax.cpp,
+	Utils.h,
+	NcursesEditor.h,
+	NcursesEditor.cpp;

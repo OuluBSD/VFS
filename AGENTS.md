@@ -27,8 +27,11 @@
 |---|---|---|---|
 | `Vfs/Core` | `uppsrc/Vfs/Core` | Library | Core data structure (`VfsValue`), extensions, registry, and mount points |
 | `Vfs/Ctrl` | `uppsrc/Vfs/Ctrl` | Library (GUI) | `WidgetCtrl`, `VfsValueExtCtrl`, `VfsTreeApp`, `VfsTreeAppWindow` |
-| `Vfs` | `uppsrc/Vfs` | Umbrella | Umbrella package for VFS Core + GUI |
+| `Vfs/Shell` | `uppsrc/Vfs/Shell` | Library / App | Command-line VFS shell interpreter, syntax parser, and ncurses editor |
+| `VfsShell` | `uppsrc/VfsShell` | Shim | Compatibility forwarding package redirecting to `Vfs/Shell` |
+| `Vfs` | `uppsrc/Vfs` | Umbrella | Umbrella package for VFS Core + GUI + Shell |
 | `tests/VfsTests` | `tests/VfsTests` | Console App | Unit test suite for `Vfs/Core` tree, factory, and JSON serialization |
+| `tests/VfsShellTests` | `tests/VfsShellTests` | Console App | Unit test suite for `Vfs/Shell` AST parser, path resolution, and command execution |
 | `examples/VfsWorkbenchDemo` | `examples/VfsWorkbenchDemo` | GUI App | Interactive and automated verification demo for `VfsTreeAppWindow` |
 
 ---
