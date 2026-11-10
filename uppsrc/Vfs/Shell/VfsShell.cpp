@@ -12,23 +12,51 @@ String ExecuteCmdNodeImpl(VfsShellConsole& console, VfsShellHostBase& host, CmdN
 
 // Check if path is in VFS overlay
 bool VfsShellConsole::IsVfsPath(const String& path) {
-	return path.StartsWith("/vfs/");
+	return path.StartsWith("/vfs/") || path == "/vfs";
+}
+
+// Normalize a virtual VFS path without platform drive letter mangling
+static String NormalizeVfsPath(const String& path) {
+	Vector<String> parts = Split(path, '/');
+	Vector<String> out;
+	for (const String& p : parts) {
+		if (p.IsEmpty() || p == ".") continue;
+		if (p == "..") {
+			if (!out.IsEmpty()) out.Drop();
+		} else {
+			out.Add(p);
+		}
+	}
+	String res;
+	for (int i = 0; i < out.GetCount(); i++) {
+		res << "/" << out[i];
+	}
+	return res.IsEmpty() ? String("/") : res;
 }
 
 // Convert path to internal format (system or VFS)
 String VfsShellConsole::ConvertToInternalPath(const String& path, const String& cwd) {
 	if (path.IsEmpty()) return cwd;
 	
-	// If it's already in the VFS overlay, return as is (normalized to forward slashes)
+	// If it's already in the VFS overlay, normalize and return
 	if (IsVfsPath(path)) {
 		String p = path;
 		p.Replace("\\", "/");
-		return p;
+		return NormalizeVfsPath(p);
 	}
 	
 	// If it's the VFS root
-	if (path == "/vfs") {
+	if (path == "/vfs" || path == "/vfs/") {
 		return "/vfs/";
+	}
+	
+	// Handle relative paths when cwd is inside VFS overlay
+	if (cwd.StartsWith("/vfs")) {
+		String newPath = cwd;
+		if (!newPath.EndsWith("/")) newPath += "/";
+		newPath += path;
+		newPath.Replace("\\", "/");
+		return NormalizeVfsPath(newPath);
 	}
 	
 	// If it's an absolute system path, return as is
@@ -36,24 +64,12 @@ String VfsShellConsole::ConvertToInternalPath(const String& path, const String& 
 		return NormalizePath(path);
 	}
 	
-	// Handle relative paths by resolving against current working directory
-	String newPath;
-	if (cwd == "/vfs") {
-		newPath = "/vfs/";
-	} else {
-		newPath = cwd;
-	}
-	
+	// System relative path
+	String newPath = cwd;
 	if (!newPath.EndsWith("/") && !newPath.EndsWith("\\"))
-		newPath += (newPath.StartsWith("/vfs") ? "/" : DIR_SEPS);
+		newPath += DIR_SEPS;
 	newPath += path;
-	
-	// Normalize the path (handle "..", ".", etc.)
-	String result = NormalizePath(newPath);
-	if (newPath.StartsWith("/vfs")) {
-		result.Replace("\\", "/");
-	}
-	return result;
+	return NormalizePath(newPath);
 }
 
 // Convert internal path back to external format
