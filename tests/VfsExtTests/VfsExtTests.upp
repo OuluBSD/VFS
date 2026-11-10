@@ -1,0 +1,17 @@
+description "Vfs Storage, Overlay, Analysis, and Solver Unit Tests\377B128,0,0";
+
+uses
+	Vfs/Core,
+	Vfs/Storage,
+	Vfs/Overlay,
+	Vfs/Analysis,
+	Vfs/Meta,
+	Vfs/Dataset,
+	Vfs/Solver,
+	Vfs/Runtime;
+
+file
+	main.cpp;
+
+mainconfig
+	"" = "";

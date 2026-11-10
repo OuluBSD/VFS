@@ -1,0 +1,33 @@
+LAYOUT(EntityInfo, 692, 152)
+	ITEM(Upp::LabelBox, dv___0, SetLabel(t_("Entity")).HSizePosZ(4, 4).TopPosZ(4, 48))
+	ITEM(Upp::Label, dv___1, SetLabel(t_("Name:")).SetAlign(Upp::ALIGN_RIGHT).LeftPosZ(12, 108).TopPosZ(24, 20))
+	ITEM(Upp::EditString, name, LeftPosZ(124, 268).TopPosZ(24, 20))
+	ITEM(Upp::Label, dv___3, SetLabel(t_("Show hidden values:")).SetAlign(Upp::ALIGN_RIGHT).RightPosZ(36, 108).TopPosZ(24, 20))
+	ITEM(Upp::Option, show_hidden_values, RightPosZ(8, 24).TopPosZ(24, 20))
+	ITEM(Upp::Splitter, split, HSizePosZ(0, 0).VSizePosZ(60, 0))
+END_LAYOUT
+
+LAYOUT(EnvEditor, 472, 300)
+	ITEM(Upp::LabelBox, dv___0, SetLabel(t_("Meta Environment")).HSizePosZ(4, 4).VSizePosZ(4, 4))
+	ITEM(Upp::Label, dv___1, SetLabel(t_("Name:")).SetAlign(Upp::ALIGN_RIGHT).LeftPosZ(12, 128).TopPosZ(24, 24))
+	ITEM(Upp::EditString, name, HSizePosZ(144, 12).TopPosZ(24, 24))
+	ITEM(Upp::Label, dv___3, SetLabel(t_("Enabled:")).SetAlign(Upp::ALIGN_RIGHT).LeftPosZ(12, 128).TopPosZ(52, 24))
+	ITEM(Upp::ArrayCtrl, items, HSizePosZ(144, 12).VSizePosZ(52, 12))
+END_LAYOUT
+
+LAYOUT(TreeDialog, 300, 300)
+	ITEM(Upp::TreeCtrl, tree, HSizePosZ(0, 0).VSizePosZ(0, 28))
+	ITEM(Upp::Button, cancel, SetLabel(t_("Cancel")).RightPosZ(96, 88).BottomPosZ(4, 20))
+	ITEM(Upp::Button, ok, SetLabel(t_("OK")).RightPosZ(4, 88).BottomPosZ(4, 20))
+END_LAYOUT
+
+LAYOUT(ComponentSelection, 492, 380)
+	ITEM(Upp::Label, dv___0, SetLabel(t_("Category group:")).SetAlign(Upp::ALIGN_RIGHT).LeftPosZ(4, 116).TopPosZ(4, 20))
+	ITEM(Upp::DropList, catgroup, HSizePosZ(124, 4).TopPosZ(4, 20))
+	ITEM(Upp::Label, dv___2, SetLabel(t_("Category:")).SetAlign(Upp::ALIGN_RIGHT).LeftPosZ(4, 116).TopPosZ(28, 20))
+	ITEM(Upp::DropList, category, HSizePosZ(124, 4).TopPosZ(28, 20))
+	ITEM(Upp::ArrayCtrl, complist, HSizePosZ(4, 4).VSizePosZ(52, 28))
+	ITEM(Upp::Button, cancel, SetLabel(t_("Cancel")).RightPosZ(108, 100).BottomPosZ(4, 20))
+	ITEM(Upp::Button, ok, SetLabel(t_("Ok")).RightPosZ(4, 100).BottomPosZ(4, 20))
+END_LAYOUT
+

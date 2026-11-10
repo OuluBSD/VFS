@@ -2,10 +2,18 @@ description "Virtual File System & Workbench Architecture\377B128,0,0";
 
 uses
 	Vfs/Core,
+	Vfs/Overlay,
+	Vfs/Storage,
+	Vfs/Dataset,
+	Vfs/Solver,
+	Vfs/Meta,
+	Vfs/Analysis,
+	Vfs/Runtime,
 	Vfs/Shell;
 
 uses(GUI)
-	Vfs/Ctrl;
+	Vfs/Ctrl,
+	MetaCtrl;
 
 file
 	Vfs.h;

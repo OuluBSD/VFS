@@ -1,0 +1,14 @@
+description "Vfs overlay interfaces (header-only stub)\377B128,0,0";
+
+uses
+	Core,
+	Vfs/Core;
+
+file
+	AGENTS.md,
+	Overlay.h,
+	VfsOverlay.h,
+	VfsOverlay.cpp,
+	Precedence.h,
+	MetaEnvironmentOverlay.cpp;
+

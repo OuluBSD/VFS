@@ -1,0 +1,11 @@
+description "MetaCtrl AST Inspector & Process Control Demo\377B128,0,0";
+
+uses
+	CtrlLib,
+	MetaCtrl;
+
+file
+	main.cpp;
+
+mainconfig
+	"" = "GUI";

@@ -1,0 +1,12 @@
+description "\377B128,0,0";
+
+uses
+	Core,
+	Vfs/Dataset;
+
+file
+	AGENTS.md,
+	Solver.h,
+	SolverBase.h,
+	SolverBase.cpp;
+

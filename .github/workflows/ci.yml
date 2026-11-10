@@ -117,6 +117,12 @@ jobs:
           uppbuilder tests/VfsShellTests -m ${{ matrix.bm }} --bazaarcore "$GITHUB_WORKSPACE/BazaarCore" -v
           ./bin/VfsShellTests
 
+      - name: Build & Run VfsExtTests (${{ matrix.bm }})
+        run: |
+          cd VFS
+          uppbuilder tests/VfsExtTests -m ${{ matrix.bm }} --bazaarcore "$GITHUB_WORKSPACE/BazaarCore" -v
+          ./bin/VfsExtTests
+
       - name: Build & Verify Vfs/Shell CLI (${{ matrix.bm }})
         run: |
           cd VFS
@@ -144,6 +150,23 @@ jobs:
         run: |
           cd VFS
           ./bin/VfsWorkbenchDemo --test
+
+      - name: Build MetaCtrlDemo (${{ matrix.bm }})
+        run: |
+          cd VFS
+          uppbuilder examples/MetaCtrlDemo -m ${{ matrix.bm }} --bazaarcore "$GITHUB_WORKSPACE/BazaarCore" -v
+
+      - name: Run MetaCtrlDemo Automated Self-Test (Linux with Xvfb)
+        if: runner.os == 'Linux'
+        run: |
+          cd VFS
+          xvfb-run -a ./bin/MetaCtrlDemo --test
+
+      - name: Run MetaCtrlDemo Automated Self-Test (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          cd VFS
+          ./bin/MetaCtrlDemo --test
 
   build-windows:
     name: Windows (windows-latest - MSVC)
@@ -252,6 +275,13 @@ jobs:
           uppbuilder.exe tests/VfsShellTests -m MSVS22x64 --bazaarcore "%GITHUB_WORKSPACE%\BazaarCore" -v
           bin\VfsShellTests.exe
 
+      - name: Build & Run VfsExtTests (MSVC)
+        shell: cmd
+        run: |
+          cd VFS
+          uppbuilder.exe tests/VfsExtTests -m MSVS22x64 --bazaarcore "%GITHUB_WORKSPACE%\BazaarCore" -v
+          bin\VfsExtTests.exe
+
       - name: Build & Verify Vfs/Shell CLI (MSVC)
         shell: cmd
         run: |
@@ -270,3 +300,10 @@ jobs:
           cd VFS
           uppbuilder.exe examples/VfsWorkbenchDemo -m MSVS22x64 --bazaarcore "%GITHUB_WORKSPACE%\BazaarCore" -v
           bin\VfsWorkbenchDemo.exe --test
+
+      - name: Build & Run MetaCtrlDemo (MSVC)
+        shell: cmd
+        run: |
+          cd VFS
+          uppbuilder.exe examples/MetaCtrlDemo -m MSVS22x64 --bazaarcore "%GITHUB_WORKSPACE%\BazaarCore" -v
+          bin\MetaCtrlDemo.exe --test

@@ -1,0 +1,19 @@
+description "\377B0,0,128";
+
+uses
+	Vfs/Ctrl,
+	Vfs/Runtime,
+	Vfs/Storage,
+	CtrlLib,
+	CodeEditor;
+
+file
+	AGENTS.md,
+	MetaCtrl.h,
+	MetaCtrl.cpp,
+	MetaCtrl.lay,
+	Images.iml,
+	Common.h,
+	Node.h,
+	ProcessCtrl.h,
+	ProcessCtrl.cpp;

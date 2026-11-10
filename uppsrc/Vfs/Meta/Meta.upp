@@ -1,0 +1,14 @@
+description "\377B128,0,0";
+
+uses
+	Core,
+	Vfs/Core;
+
+file
+	AGENTS.md,
+	Meta.h,
+	MetaDefs.h,
+	MetaCommon.h,
+	MetaCommon.cpp,
+	MetaInit.icpp;
+
