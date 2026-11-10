@@ -5,15 +5,6 @@
 #include <Qwen/CmdQwen.h>  // Include for Qwen command
 #endif
 
-#ifdef flagIDE
-#include <ide/Core/ConsoleHeadless.h>  // For IDE command handling
-#else
-namespace Upp {
-inline bool HandleConsoleIdeArgs(const Vector<String>& ide_args) { return false; }
-inline const char* GetConsoleIdeExperimentalNotice() { return "TheIDE console integration is not available in standalone VfsShell."; }
-}
-#endif
-
 NAMESPACE_UPP
 
 // Forward declaration for ExecuteCmdNode - we'll implement this after other methods

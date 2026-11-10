@@ -1,18 +1,15 @@
 #include "VfsShell.h"
+
+// This translation unit is the standalone VfsShell console entry point. GUI
+// consumers of the VfsShell library (Explorer) and tests bring their own main(),
+// so the whole TU is compiled out unless building the standalone main.
+#if !defined(flagGUI) && defined(flagMAIN)
+
 #include <Core/Core.h>
 #include <Vfs/Core/VfsBase.h>  // For VFS mounting functionality
 
 #ifdef flagQWEN
 #include <Qwen/CmdQwen.h>
-#endif
-
-#ifdef flagIDE
-#include <ide/Core/ConsoleHeadless.h>  // For IDE command handling
-#else
-namespace Upp {
-inline bool HandleConsoleIdeArgs(const Vector<String>& ide_args) { return false; }
-inline const char* GetConsoleIdeExperimentalNotice() { return "TheIDE console integration is not available in standalone VfsShell."; }
-}
 #endif
 
 #include <iostream>
@@ -22,11 +19,6 @@ inline const char* GetConsoleIdeExperimentalNotice() { return "TheIDE console in
 #include <termios.h> // For terminal manipulation
 #include <unistd.h>  // For read, STDIN_FILENO
 #endif
-
-// This translation unit is the standalone VfsShell console entry point. GUI
-// consumers of the VfsShell library (Explorer) and tests bring their own main(),
-// so the whole TU is compiled out unless building the standalone main.
-#if !defined(flagGUI) && defined(flagMAIN)
 
 using namespace std;
 

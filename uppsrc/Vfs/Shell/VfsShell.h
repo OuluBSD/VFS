@@ -9,6 +9,13 @@
 
 NAMESPACE_UPP
 
+#ifdef flagIDE
+#include <ide/Core/ConsoleHeadless.h>
+#else
+inline bool HandleConsoleIdeArgs(const Vector<String>& ide_args) { return false; }
+inline const char* GetConsoleIdeExperimentalNotice() { return "TheIDE console integration is not available in standalone VfsShell."; }
+#endif
+
 // VfsShell - A command-line interface for VFS operations
 class VfsShellHostBase {
 public:
