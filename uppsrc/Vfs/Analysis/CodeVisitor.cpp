@@ -9,11 +9,13 @@ bool (*IsFunctionPtr)(int kind);
 bool (*IsStructKindPtr)(const VfsValue& n);
 
 CodeVisitorProfile::CodeVisitorProfile() {
-	memset(&cfg, 0, sizeof(cfg));
+	for(int i = 0; i < RULE_COUNT; i++)
+		cfg[i] = false;
 }
 
 void CodeVisitorProfile::operator=(const CodeVisitorProfile& p) {
-	memcpy(&cfg, &p.cfg, sizeof(cfg));
+	for(int i = 0; i < RULE_COUNT; i++)
+		cfg[i] = p.cfg[i];
 }
 
 bool CodeVisitorProfile::Is(Rule r) const {
@@ -28,7 +30,8 @@ CodeVisitorProfile& CodeVisitorProfile::Set(Rule r, bool b) {
 }
 
 CodeVisitorProfile& CodeVisitorProfile::SetAllTrue() {
-	memset(&cfg, 0xFF, sizeof(cfg));
+	for(int i = 0; i < RULE_COUNT; i++)
+		cfg[i] = true;
 	return *this;
 }
 
