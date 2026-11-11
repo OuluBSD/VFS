@@ -117,6 +117,9 @@ bool VfsLoadOverlayIndexChunked(const String& path, VfsOverlayIndex& out_index);
 void BuildRouterOverlayIndex(const VfsValue& fragment, VfsOverlayIndex& out_index);
 void BuildRouterOverlayIndex(const VfsValue& fragment, OverlayIndexSink& sink);
 
+#ifndef _RouterPortDesc_defined_
+#define _RouterPortDesc_defined_
+
 inline Value RouterLookupValue(const ValueMap& map, const char* key) {
 	int idx = map.Find(Value(String(key)));
 	if (idx >= 0)
@@ -124,8 +127,6 @@ inline Value RouterLookupValue(const ValueMap& map, const char* key) {
 	return Value();
 }
 
-#ifndef _RouterPortDesc_defined_
-#define _RouterPortDesc_defined_
 struct RouterPortDesc : Moveable<RouterPortDesc> {
 	enum class Direction { Sink, Source };
 
@@ -211,7 +212,6 @@ inline bool LoadRouterConnectionDesc(const Value& value, RouterConnectionDesc& o
 		out.metadata = meta_value;
 	return true;
 }
-#endif
 
 struct RouterPortEntry : Moveable<RouterPortEntry> {
 	String          atom_id;
@@ -302,6 +302,8 @@ inline bool LoadRouterSchema(const Value& value, RouterSchema& out) {
 		out.flow_control.Clear();
 	return true;
 }
+
+#endif // _RouterPortDesc_defined_
 
 END_UPP_NAMESPACE
 
